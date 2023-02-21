@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from './actions/index'
 
 function App() {
+  let amount = useSelector((state) => state.changeNum);
+  let dispatch = useDispatch();
+  const {incNum, decNum} = bindActionCreators(actionCreators, dispatch);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='container mt-4'>
+        <h2 className='mb-4'>Increment/Decrement Amount</h2>
+        <button className="btn btn-primary mx-2" onClick={() => decNum(5)}> - </button>
+          value : {amount}
+        <button className="btn btn-primary mx-2" onClick={() => incNum(5)}> + </button>
+    </div>
     </div>
   );
 }
